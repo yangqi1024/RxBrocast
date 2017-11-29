@@ -6,8 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,25 +25,10 @@ public class MainActivity extends AppCompatActivity {
                  mNetworkChangeReceiver = new NetBrocastReceiver();
                 registerReceiver(mNetworkChangeReceiver,intentFilter);
                 RxBroadcast.netChanges(mNetworkChangeReceiver)
-                        .subscribeListener(new Observer<Boolean>() {
+                        .subscribe(new Consumer<Boolean>() {
                             @Override
-                            public void onSubscribe(Disposable d) {
-
-                            }
-
-                            @Override
-                            public void onNext(Boolean aBoolean) {
+                            public void accept(Boolean aBoolean) throws Exception {
                                 Log.d("MainActivity","aBoolean="+aBoolean);
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-
-                            }
-
-                            @Override
-                            public void onComplete() {
-
                             }
                         });
             }
