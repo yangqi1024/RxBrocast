@@ -1,7 +1,7 @@
 # RxBrocast
-###具体代码
+### 具体代码
 ```Java
- @Override
+  @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -13,25 +13,10 @@
                  mNetworkChangeReceiver = new NetBrocastReceiver();
                 registerReceiver(mNetworkChangeReceiver,intentFilter);
                 RxBroadcast.netChanges(mNetworkChangeReceiver)
-                        .subscribeListener(new Observer<Boolean>() {
+                        .subscribe(new Consumer<Boolean>() {
                             @Override
-                            public void onSubscribe(Disposable d) {
-
-                            }
-
-                            @Override
-                            public void onNext(Boolean aBoolean) {
+                            public void accept(Boolean aBoolean) throws Exception {
                                 Log.d("MainActivity","aBoolean="+aBoolean);
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-
-                            }
-
-                            @Override
-                            public void onComplete() {
-
                             }
                         });
             }
